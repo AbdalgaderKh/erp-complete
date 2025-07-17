@@ -13,12 +13,11 @@ services:
       - key: ALLOWED_HOSTS
         value: erp-api.onrender.com
 
-  - type: web
+  - type: static
     name: erp-frontend
-    env: node
-    buildCommand: npm install && npm run build
-    startCommand: serve -s dist
     staticPublishPath: dist
+    buildCommand: npm install && npm run build
+    env: node
     plan: free
     envVars:
       - key: VITE_API_BASE_URL
