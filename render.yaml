@@ -16,8 +16,7 @@ services:
     name: erp-frontend
     env: node
     plan: free
+    rootDir: frontend
     buildCommand: "npm install && npm run build"
     startCommand: "npx serve -s dist"
-    envVars: []
     autoDeploy: true
-    rootDir: frontend
