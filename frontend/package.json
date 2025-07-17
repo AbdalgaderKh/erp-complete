@@ -5,5 +5,8 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^4.5.0"
   }
 }

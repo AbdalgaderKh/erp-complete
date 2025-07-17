@@ -1,0 +1,1 @@
+console.log('ERP Frontend Ready');
