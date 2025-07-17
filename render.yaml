@@ -2,7 +2,6 @@ services:
   - type: web
     name: erp-api
     env: python
-    plan: free
     buildCommand: |
       cd efk/backend
       pip install -r requirements.txt
@@ -17,10 +16,8 @@ services:
       - key: ALLOWED_HOSTS
         value: "erp-api.onrender.com"
 
-  - type: web
-    name: erp-frontend
-    env: static
-    plan: free
+  - type: static
+    name: erp-frontend-static
     buildCommand: cd efk/frontend && npm install && npm run build
     staticPublishPath: efk/frontend/dist
     envVars:
