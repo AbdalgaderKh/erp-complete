@@ -1,4 +1,6 @@
-Django
+Django>=4.2
 djangorestframework
-Faker
 gunicorn
+whitenoise
+django-cors-headers
+psycopg2-binary
