@@ -20,3 +20,4 @@ services:
     startCommand: "npx serve -s dist"
     envVars: []
     autoDeploy: true
+    rootDir: frontend
