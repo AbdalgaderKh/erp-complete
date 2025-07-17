@@ -5,6 +5,7 @@ services:
     buildCommand: pip install -r requirements.txt && python manage.py migrate && python generate_fake_data.py
     startCommand: gunicorn backend.wsgi:application
     plan: free
+    rootDir: backend
     envVars:
       - key: DJANGO_SECRET_KEY
         value: your-secret-key-here
@@ -19,6 +20,7 @@ services:
     buildCommand: npm install && npm run build
     startCommand: npx serve -s dist -l $PORT
     plan: free
+    rootDir: frontend
     envVars:
       - key: VITE_API_BASE_URL
         value: https://erp-api.onrender.com/api
