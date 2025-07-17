@@ -1,1 +1,2 @@
-# manage.py placeholder content
+# placeholder manage.py
+print('Django manage')
