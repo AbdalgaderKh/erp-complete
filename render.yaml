@@ -2,25 +2,27 @@ services:
   - type: web
     name: erp-api
     env: python
-    buildCommand: pip install -r requirements.txt && python manage.py migrate && python generate_fake_data.py
-    startCommand: gunicorn backend.wsgi:application
     plan: free
-    rootDir: backend
+    buildCommand: |
+      cd efk/backend
+      pip install -r requirements.txt
+      python manage.py migrate
+      python manage.py loaddata initial_data.json || true
+    startCommand: cd efk/backend && gunicorn backend.wsgi:application
     envVars:
       - key: DJANGO_SECRET_KEY
-        value: your-secret-key-here
+        generateValue: true
       - key: DEBUG
-        value: false
+        value: "False"
       - key: ALLOWED_HOSTS
-        value: erp-api.onrender.com
+        value: "erp-api.onrender.com"
 
   - type: web
     name: erp-frontend
-    env: node
-    buildCommand: npm install && npm run build
-    startCommand: npx serve -s dist -l $PORT
+    env: static
     plan: free
-    rootDir: frontend
+    buildCommand: cd efk/frontend && npm install && npm run build
+    staticPublishPath: efk/frontend/dist
     envVars:
       - key: VITE_API_BASE_URL
         value: https://erp-api.onrender.com/api
