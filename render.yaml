@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: erp-api
+    env: python
+    buildCommand: pip install -r requirements.txt && python manage.py migrate && python generate_fake_data.py
+    startCommand: gunicorn erp_backend.wsgi
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        value: your-secret-key-here
+      - key: DEBUG
+        value: false
+      - key: ALLOWED_HOSTS
+        value: erp-api.onrender.com
+
+  - type: static
+    name: erp-frontend
+    env: static
+    buildCommand: npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://erp-api.onrender.com/api
